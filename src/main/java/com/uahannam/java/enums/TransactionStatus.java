@@ -1,8 +1,10 @@
 package com.uahannam.java.enums;
 
+// 결제 중간중간의 상태에 대한 상태
 public enum TransactionStatus {
-    APPROVED, // 승인
-    REVERSED, // 거래 완료 후 취소
-    REFUNDED, // 고객에게 돈을 다시 돌려준다
-    CANCELLED // 거래 최종승인 전 중단
+    IN_PROGRESS,
+    SUCCESS,
+    FAILED,
+    CANCELED, // 결제 취소
+    DECLINED, // 결제 거부 (ex.포인트 부족)
 }
