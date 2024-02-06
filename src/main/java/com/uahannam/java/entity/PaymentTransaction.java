@@ -3,8 +3,6 @@ package com.uahannam.java.entity;
 import com.uahannam.java.enums.TransactionStatus;
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "Payement_Transaction")
 public class PaymentTransaction {
@@ -23,7 +21,4 @@ public class PaymentTransaction {
     private Integer amount;
 
     private String description;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
 }

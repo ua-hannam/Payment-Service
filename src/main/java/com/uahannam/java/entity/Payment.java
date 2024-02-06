@@ -2,11 +2,12 @@ package com.uahannam.java.entity;
 
 import com.uahannam.java.enums.PaymentStatus;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
 @Entity
-public class Payment {
+public class Payment extends SysTimeCol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,6 @@ public class Payment {
     @Enumerated(EnumType.STRING)
     private PaymentStatus status;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    @LastModifiedDate
+    private LocalDateTime mod_date;
 }
