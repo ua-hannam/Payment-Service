@@ -1,8 +1,7 @@
 package com.uahannam.java.enums;
 
-// 결제 중간중간의 상태에 대한 상태
+// 결제 이후의 거래 상태, 거래의 모든 기록을 의미함
 public enum TransactionStatus {
-    IN_PROGRESS,
     SUCCESS,
     FAILED,
     CANCELED, // 결제 취소

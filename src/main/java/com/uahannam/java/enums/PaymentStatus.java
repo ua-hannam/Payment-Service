@@ -1,6 +1,6 @@
 package com.uahannam.java.enums;
 
-// 결제의 마지막 상태
+// 결제 그 자체의 상태
 public enum PaymentStatus {
     PENDING,
     SUCCESS,
