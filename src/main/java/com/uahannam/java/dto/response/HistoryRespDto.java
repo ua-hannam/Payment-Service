@@ -6,9 +6,9 @@ import java.util.List;
 
 public class HistoryRespDto {
 
-    private List<History> data;
+    private List<History> histories;
 
-    public HistoryRespDto(List<History> data) {
-        this.data = data;
+    public HistoryRespDto(List<History> histories) {
+        this.histories = histories;
     }
 }
