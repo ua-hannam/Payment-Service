@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Payement_Transaction")
-public class PaymentTransaction {
+public class PaymentTransaction extends SysTimeCol{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
