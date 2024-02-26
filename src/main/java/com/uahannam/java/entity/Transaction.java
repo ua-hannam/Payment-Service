@@ -4,8 +4,8 @@ import com.uahannam.java.enums.TransactionStatus;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Payement_Transaction")
-public class PaymentTransaction extends SysTimeCol{
+@Table(name = "Transaction")
+public class Transaction extends SysTimeCol{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

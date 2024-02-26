@@ -2,11 +2,17 @@ package com.uahannam.java.entity;
 
 import com.uahannam.java.enums.PaymentStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Payment extends SysTimeCol {
 
     @Id
