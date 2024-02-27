@@ -5,5 +5,6 @@ public enum PaymentStatus {
     PENDING,
     SUCCESS,
     FAILED,  // 결제 실패
+    CANCELED,
     DECLINED // Point 가 부족한 경우
 }

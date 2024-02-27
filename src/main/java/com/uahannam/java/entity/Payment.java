@@ -4,6 +4,7 @@ import com.uahannam.java.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Builder
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Payment extends SysTimeCol {
@@ -29,4 +31,8 @@ public class Payment extends SysTimeCol {
 
     @LastModifiedDate
     private LocalDateTime mod_date;
+
+    public void setStatus(PaymentStatus status) {
+        this.status = status;
+    }
 }

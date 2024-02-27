@@ -2,7 +2,7 @@ package com.uahannam.java.repository;
 
 import com.uahannam.java.dto.query.TransactionDto;
 import com.uahannam.java.entity.Transaction;
-import com.uahannam.java.enums.TransactionStatus;
+import com.uahannam.java.enums.PaymentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,7 +14,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     @Query("select new com.uahannam.java.dto.query.TransactionDto(pt.id, pt.status, pt.amount, pt.reg_date) " +
             "from Transaction pt " +
             "where pt.status = :status")
-    List<TransactionDto> findDtoByStatus(TransactionStatus status);
+    List<TransactionDto> findDtoByStatus(PaymentStatus status);
 
     @Query("select new com.uahannam.java.dto.query.TransactionDto(pt.id, pt.status, pt.amount, pt.reg_date) " +
             "from Transaction pt " +

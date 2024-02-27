@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class PaymentTransactionService {
+public class TransactionService {
 
     private final TransactionRepository transactionRepository;
 

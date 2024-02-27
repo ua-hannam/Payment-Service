@@ -1,10 +1,16 @@
 package com.uahannam.java.entity;
 
-import com.uahannam.java.enums.TransactionStatus;
+import com.uahannam.java.enums.PaymentStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Transaction")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Transaction extends SysTimeCol{
 
     @Id
@@ -16,7 +22,7 @@ public class Transaction extends SysTimeCol{
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private TransactionStatus status;
+    private PaymentStatus status;
 
     private Integer amount;
 
