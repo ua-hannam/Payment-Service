@@ -4,7 +4,7 @@ spring:
   profiles:
     active: local
   datasource:
-    url: jdbc:h2:tcp://localhost/~/ua_payment
+    url: jdbc:h2:mem:test;
     username: sa
     password: ''
     driver-class-name: org.h2.Driver

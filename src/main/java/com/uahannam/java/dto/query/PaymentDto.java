@@ -1,7 +1,9 @@
 package com.uahannam.java.dto.query;
 
 import com.uahannam.java.enums.PaymentStatus;
+import lombok.Getter;
 
+@Getter
 public class PaymentDto implements History {
     private Long id;
     private PaymentStatus status;

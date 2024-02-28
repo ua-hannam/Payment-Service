@@ -4,20 +4,21 @@ import com.uahannam.java.dto.query.PaymentDto;
 import com.uahannam.java.dto.request.PostDto;
 import com.uahannam.java.dto.response.HistoryRespDto;
 import com.uahannam.java.service.PaymentService;
+import com.uahannam.java.service.TransactionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/payment-service")
+@RestController
+@RequestMapping("/payment")
 @RequiredArgsConstructor
 public class PaymentController {
 
     private final PaymentService paymentService;
+    private final TransactionService transactionService;
 
-    @PostMapping("/payment")
+    @PostMapping("/")
     public ResponseEntity<PaymentDto> createCharge(@RequestBody @Valid PostDto postDto) {
         Long userId = Long.valueOf(postDto.getUserId());
         Integer amount = postDto.getAmount();
@@ -46,7 +47,7 @@ public class PaymentController {
 
     @GetMapping("/members/{userId}/transactions")
     public ResponseEntity<HistoryRespDto> getTransactions(@PathVariable Long userId) {
-        HistoryRespDto transactionHistory = paymentService.fetchTransactionHistory(userId);
+        HistoryRespDto transactionHistory = transactionService.fetchTransactionHistory(userId);
 
         return ResponseEntity.ok(transactionHistory);
     }

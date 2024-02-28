@@ -3,10 +3,12 @@ package com.uahannam.java.dto.response;
 import com.uahannam.java.dto.query.History;
 import com.uahannam.java.dto.query.PaymentDto;
 import com.uahannam.java.dto.query.TransactionDto;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class HistoryRespDto {
 
     private List<History> histories;
