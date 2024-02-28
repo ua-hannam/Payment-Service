@@ -2,13 +2,10 @@ package com.uahannam.java.service;
 
 import com.uahannam.java.client.MemberServiceClient;
 import com.uahannam.java.dto.query.PaymentDto;
-import com.uahannam.java.dto.query.TransactionDto;
 import com.uahannam.java.dto.response.HistoryRespDto;
 import com.uahannam.java.entity.Payment;
-import com.uahannam.java.entity.Transaction;
 import com.uahannam.java.enums.PaymentStatus;
 import com.uahannam.java.repository.PaymentRepository;
-import com.uahannam.java.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +18,7 @@ import java.util.List;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
-    private final TransactionRepository transactionRepository;
+    private final TransactionService transactionService;
     private final MemberServiceClient memberServiceClient;
 
     // 포인트 충전
@@ -33,16 +30,16 @@ public class PaymentService {
                 .status(PaymentStatus.PENDING)
                 .build();
         paymentRepository.save(pendingPayment);
-        saveTransaction(pendingPayment);
+        transactionService.saveTransaction(pendingPayment);
 
         try {
             paymentRepository.save(pendingPayment);
             pendingPayment.setStatus(PaymentStatus.SUCCESS);
-            saveTransaction(pendingPayment);
+            transactionService.saveTransaction(pendingPayment);
         } catch (Exception e) {
             pendingPayment.setStatus(PaymentStatus.FAILED);
             paymentRepository.save(pendingPayment);
-            saveTransaction(pendingPayment);
+            transactionService.saveTransaction(pendingPayment);
             throw new RuntimeException("failed to process payment ", e);
         }
 
@@ -69,11 +66,11 @@ public class PaymentService {
         try {
             paymentRepository.save(pendingPayment);
             pendingPayment.setStatus(PaymentStatus.SUCCESS);
-            saveTransaction(pendingPayment);
+            transactionService.saveTransaction(pendingPayment);
         } catch (Exception e) {
             pendingPayment.setStatus(PaymentStatus.FAILED);
             paymentRepository.save(pendingPayment);
-            saveTransaction(pendingPayment);
+            transactionService.saveTransaction(pendingPayment);
             throw new RuntimeException("failed to process payment ", e);
         }
 
@@ -89,21 +86,4 @@ public class PaymentService {
         return HistoryRespDto.fromPaymentDtos(payments);
     }
 
-    // 거래 이력 조회
-    public HistoryRespDto fetchTransactionHistory(Long userId) {
-        List<TransactionDto> transactions = transactionRepository.findDtoByMemberId(userId);
-        // HistoryRespDto에 맞게 Transaction 정보를 변환하여 반환
-        return HistoryRespDto.fromTransactionDtos(transactions);
-    }
-
-    private void saveTransaction(Payment payment) {
-        Transaction transaction = Transaction.builder()
-                .paymentId(payment.getId())
-                .status(payment.getStatus())
-                .amount(payment.getAmount())
-                .description(payment.getStatus().name() + ": " + payment.getAmount())
-                .build();
-
-        transactionRepository.save(transaction);
-    }
 }
