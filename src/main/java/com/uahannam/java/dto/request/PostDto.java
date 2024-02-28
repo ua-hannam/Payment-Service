@@ -8,7 +8,7 @@ import lombok.Getter;
 public class PostDto {
 
     @NotNull(message = "사용자 id 는 필수입니다.")
-    private String userId;
+    private Long userId;
 
     @Min(value = 1, message = "충전 금액은 1 이상이어야 합니다.")
     private Integer amount;
