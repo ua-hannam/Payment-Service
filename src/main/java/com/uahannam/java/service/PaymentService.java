@@ -35,12 +35,11 @@ public class PaymentService {
         try {
             paymentRepository.save(pendingPayment);
             pendingPayment.setStatus(PaymentStatus.SUCCESS);
-            transactionService.saveTransaction(pendingPayment);
         } catch (Exception e) {
             pendingPayment.setStatus(PaymentStatus.FAILED);
             paymentRepository.save(pendingPayment);
+        } finally {
             transactionService.saveTransaction(pendingPayment);
-            throw new RuntimeException("failed to process payment ", e);
         }
 
         // Transaction 생성 로직은 일단 생략
@@ -59,6 +58,7 @@ public class PaymentService {
                 .status(PaymentStatus.PENDING)
                 .build();
         Integer leftPoints = memberServiceClient.getPoints(userId);
+        transactionService.saveTransaction(pendingPayment);
 
         if (leftPoints < amount) // 요금 부족
             pendingPayment.setStatus(PaymentStatus.DECLINED);
@@ -66,12 +66,11 @@ public class PaymentService {
         try {
             paymentRepository.save(pendingPayment);
             pendingPayment.setStatus(PaymentStatus.SUCCESS);
-            transactionService.saveTransaction(pendingPayment);
         } catch (Exception e) {
             pendingPayment.setStatus(PaymentStatus.FAILED);
             paymentRepository.save(pendingPayment);
+        } finally {
             transactionService.saveTransaction(pendingPayment);
-            throw new RuntimeException("failed to process payment ", e);
         }
 
         return new PaymentDto(pendingPayment.getId(),

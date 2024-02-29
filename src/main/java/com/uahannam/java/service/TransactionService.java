@@ -18,6 +18,7 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
 
+    @Transactional
     public void saveTransaction(Payment payment) {
         Transaction transaction = Transaction.builder()
                 .paymentId(payment.getId())
