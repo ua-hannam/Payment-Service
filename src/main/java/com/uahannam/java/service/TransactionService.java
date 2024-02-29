@@ -4,11 +4,13 @@ import com.uahannam.java.dto.query.TransactionDto;
 import com.uahannam.java.dto.response.HistoryRespDto;
 import com.uahannam.java.entity.Payment;
 import com.uahannam.java.entity.Transaction;
+import com.uahannam.java.enums.PaymentStatus;
 import com.uahannam.java.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,15 +20,14 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
 
-    @Transactional
-    public void saveTransaction(Payment payment) {
+    // 상태와 Payment 객체를 받아 Transaction을 저장하는 메소드
+    public void saveTransaction(Payment payment, PaymentStatus status) {
         Transaction transaction = Transaction.builder()
                 .paymentId(payment.getId())
-                .status(payment.getStatus())
+                .status(status)
                 .amount(payment.getAmount())
-                .description(payment.getStatus().name() + ": " + payment.getAmount())
+                .description("Payment status changed to " + status)
                 .build();
-
         transactionRepository.save(transaction);
     }
 
