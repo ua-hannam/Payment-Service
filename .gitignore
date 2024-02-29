@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Run H2 ###
+runH2.sh
